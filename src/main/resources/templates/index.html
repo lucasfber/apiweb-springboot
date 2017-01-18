@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Pagina Principal</title>
+<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{css/estilo.css}" />
+<script type="text/javascript" th:src="@{js/angular.min.js}"></script>
+<script type="text/javascript" th:src="@{js/app.js}"></script>
+
+</head>
+<body ng-app="ApiWebApp" ng-controller="IndexController">
+	<div class="container">
+		<div class="page-header">
+			<h3>Tabela de Clientes</h3>
+		</div>
+		
+		<form action="#">
+			Nome:<input type="text" ng-model="cliente.nome" placeholder="Digite o nome do cliente" class="form-control"/>
+			<input type="button" class="btn btn-primary" value="Cadastrar" ng-click="cadastraCliente(cliente)"/>
+		</form>
+	
+		<h3>Clientes</h3>
+	
+		<input type="text" id="busca" ng-model="busca" class="form-control campoBusca" placeholder="O que você procura ? "/>
+		<table class="table table-bordered table-hover">
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th><span class="glyphicon glyphicon-trash"></span></th>
+				<th>Editar</th>
+			</tr>
+			
+			<tr ng-repeat="cliente in listaClientes | filter : busca">
+				<td>{{cliente.id}}</td>
+				<td>{{cliente.nome}}</td>
+				<td>{{cliente.email}}</td>
+				<td><button class="btn btn-sm btn-danger" ng-click="deletarCliente(cliente)">Deletar</button></td>
+				<td>Editar</td>
+			</tr>
+		</table>
+		
+	</div>
+	
+	
+	<div ng-include="'templates/rodape.html'"></div>
+</body>
+</html>
